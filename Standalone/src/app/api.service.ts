@@ -11,4 +11,8 @@ export class ApiService {
   ping$() {
     return this.http.get(`${config.apiUri}/api/external`);
   }
+
+  pingDos$() {
+    return this.http.get(`${config.apiDosUri}/api/external`);
+  }
 }

@@ -3,13 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 import config from '../../auth_config.json';
 
-const { domain, clientId, authorizationParams: { audience }, apiUri, errorPath } = config as {
+const { domain, clientId, authorizationParams: { audience }, apiUri, apiDosUri, errorPath } = config as {
   domain: string;
   clientId: string;
   authorizationParams: {
     audience?: string;
   },
   apiUri: string;
+  apiDosUri: string;
   errorPath: string;
 };
 
@@ -25,7 +26,18 @@ export const environment = {
     errorPath,
   },
   httpInterceptor: {
-    allowedList: [`${apiUri}/*`],
+    allowedList: [
+      `${apiUri}/*`,
+      {
+        uri: `${apiDosUri}/*`,
+        tokenOptions: {
+          authorizationParams: {
+            // The attached token should target this audience
+            audience: 'https://api-dos'
+          }
+        }
+      }
+    ],
   },
 };
 

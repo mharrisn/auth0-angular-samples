@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <h1>External API</h1>
-  
+
   <div *ngIf="hasApiError" class="alert alert-danger" role="alert">
     An error occured when trying to call the local API on port 3001. Ensure the local API is started using either `npm run dev` or `npm run
     server:api`.
@@ -58,13 +58,23 @@
     API's audience value.
   </p>
 
-  <button
+  <div class="buttons">
+    <button
     class="btn btn-primary mb-5"
     [disabled]="!audience"
     (click)="pingApi()"
   >
     Ping API
   </button>
+
+  <button
+  class="btn btn-warning mb-5"
+  [disabled]="!audience"
+  (click)="pingApiDos()"
+>
+  Ping API Dos
+</button>
+  </div>
 
   <div class="result-block-container" *ngIf="responseJson">
     <div class="result-block" [ngClass]="{ show: !!responseJson }">

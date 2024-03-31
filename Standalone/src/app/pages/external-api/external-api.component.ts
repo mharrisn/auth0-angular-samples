@@ -32,4 +32,14 @@ export class ExternalApiComponent {
       error: () => this.hasApiError = true,
     });
   }
+
+  pingApiDos() {
+    this.api.pingDos$().subscribe({
+      next: (res) => {
+        this.hasApiError = false;
+        this.responseJson = JSON.stringify(res, null, 2).trim();
+      },
+      error: () => this.hasApiError = true,
+    });
+  }
 }
